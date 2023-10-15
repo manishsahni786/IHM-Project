@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MainWindows" xml:space="preserve">
+    <value>主窗口</value>
+  </data>
+  <data name="USPr1" xml:space="preserve">
+    <value>自动打印輪</value>
+  </data>
+  <data name="USPr2" xml:space="preserve">
+    <value>條碼</value>
+  </data>
+  <data name="USPr3" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="USPr4" xml:space="preserve">
+    <value>日期/小時</value>
+  </data>
+  <data name="USPr5" xml:space="preserve">
+    <value>最终数据</value>
+  </data>
+  <data name="USPr6" xml:space="preserve">
+    <value>扭矩最小值</value>
+  </data>
+  <data name="USPr7" xml:space="preserve">
+    <value>扭矩最大值</value>
+  </data>
+  <data name="USPr8" xml:space="preserve">
+    <value>用户名称</value>
+  </data>
+  <data name="USC1" xml:space="preserve">
+    <value>計算车轮偏移量</value>
+  </data>
+  <data name="USC3" xml:space="preserve">
+    <value>降低噪音 </value>
+  </data>
+  <data name="USCTitle" xml:space="preserve">
+    <value>计算方式</value>
+  </data>
+  <data name="USD1" xml:space="preserve">
+    <value>自动缩放</value>
+  </data>
+  <data name="USD2" xml:space="preserve">
+    <value>完全符合</value>
+  </data>
+  <data name="USD3B" xml:space="preserve">
+    <value>块形</value>
+  </data>
+  <data name="USD3R" xml:space="preserve">
+    <value>雷達形</value>
+  </data>
+  <data name="USD6" xml:space="preserve">
+    <value>最小值 - 最大值</value>
+  </data>
+  <data name="USD7" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="USDLabel1" xml:space="preserve">
+    <value>单位</value>
+  </data>
+  <data name="USDLabel2" xml:space="preserve">
+    <value>即時的</value>
+  </data>
+  <data name="USDLabel3" xml:space="preserve">
+    <value>电压图</value>
+  </data>
+  <data name="USDLabel4" xml:space="preserve">
+    <value>參數</value>
+  </data>
+  <data name="USDTitle" xml:space="preserve">
+    <value>數據</value>
+  </data>
+  <data name="USGLabel1" xml:space="preserve">
+    <value>目标</value>
+  </data>
+  <data name="USGLabel2" xml:space="preserve">
+    <value>图表</value>
+  </data>
+  <data name="USGTitle" xml:space="preserve">
+    <value>图像</value>
+  </data>
+  <data name="USP1" xml:space="preserve">
+    <value>老師</value>
+  </data>
+  <data name="USP2" xml:space="preserve">
+    <value>庆祝</value>
+  </data>
+  <data name="USP3" xml:space="preserve">
+    <value>沒有踏板（自動 )</value>
+  </data>
+  <data name="USP4" xml:space="preserve">
+    <value>单数/ 偶数</value>
+  </data>
+  <data name="USPLabel1" xml:space="preserve">
+    <value>幅条分析</value>
+  </data>
+  <data name="USPrTitle" xml:space="preserve">
+    <value>打印机</value>
+  </data>
+  <data name="USPTitle" xml:space="preserve">
+    <value>性能</value>
+  </data>
+  <data name="USTitle" xml:space="preserve">
+    <value>用戶設置</value>
+  </data>
+  <data name="USMTitle" xml:space="preserve">
+    <value>手冊</value>
+  </data>
+  <data name="DirTitle" xml:space="preserve">
+    <value>目錄</value>
+  </data>
+  <data name="Dir1" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Dir2" xml:space="preserve">
+    <value>加载</value>
+  </data>
+  <data name="Dir3" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="FW1" xml:space="preserve">
+    <value>轮子名称</value>
+  </data>
+  <data name="FW2" xml:space="preserve">
+    <value>花鼓</value>
+  </data>
+  <data name="FW3" xml:space="preserve">
+    <value>宽度 </value>
+  </data>
+  <data name="FW4" xml:space="preserve">
+    <value>车轮偏移</value>
+  </data>
+  <data name="FW5" xml:space="preserve">
+    <value>轮圈</value>
+  </data>
+  <data name="FW6" xml:space="preserve">
+    <value>周長</value>
+  </data>
+  <data name="FW8" xml:space="preserve">
+    <value>钢丝分析数据</value>
+  </data>
+  <data name="FW9" xml:space="preserve">
+    <value>數量</value>
+  </data>
+  <data name="FW10" xml:space="preserve">
+    <value>轮式</value>
+    <comment>Traduction fr --&gt; zh : Type de roue</comment>
+  </data>
+  <data name="FW11" xml:space="preserve">
+    <value>自行車</value>
+  </data>
+  <data name="FW12" xml:space="preserve">
+    <value>側</value>
+  </data>
+  <data name="FW13" xml:space="preserve">
+    <value>配對識別</value>
+  </data>
+  <data name="FW14" xml:space="preserve">
+    <value>性能</value>
+  </data>
+  <data name="FW15" xml:space="preserve">
+    <value>幾何</value>
+  </data>
+  <data name="FW16" xml:space="preserve">
+    <value>側面</value>
+  </data>
+  <data name="FW17" xml:space="preserve">
+    <value>上面和下面</value>
+  </data>
+  <data name="FW18" xml:space="preserve">
+    <value>车轮偏移</value>
+  </data>
+  <data name="FW19" xml:space="preserve">
+    <value>钢丝张力</value>
+    <comment>Traduction fr --&gt; zh : Tension de rayon</comment>
+  </data>
+  <data name="FW20" xml:space="preserve">
+    <value>平均所有钢丝张力</value>
+  </data>
+  <data name="FW21" xml:space="preserve">
+    <value>每個钢丝</value>
+    <comment>Traduction fr --&gt; zh : Chaque rayon</comment>
+  </data>
+  <data name="FW22" xml:space="preserve">
+    <value>左边 </value>
+  </data>
+  <data name="FW23" xml:space="preserve">
+    <value>右边</value>
+  </data>
+  <data name="FW24" xml:space="preserve">
+    <value>最大值</value>
+  </data>
+  <data name="FW25" xml:space="preserve">
+    <value>最低值</value>
+  </data>
+  <data name="FW26" xml:space="preserve">
+    <value>鎮定</value>
+  </data>
+  <data name="FW27" xml:space="preserve">
+    <value>来回稳定数/ 千克</value>
+  </data>
+  <data name="FW7s" xml:space="preserve">
+    <value>对称</value>
+  </data>
+  <data name="FW7c" xml:space="preserve">
+    <value>控制</value>
+  </data>
+  <data name="FW28" xml:space="preserve">
+    <value>校准</value>
+  </data>
+  <data name="FW29" xml:space="preserve">
+    <value>命中數/轉數</value>
+  </data>
+  <data name="LogTitle" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="SP1" xml:space="preserve">
+    <value>钢丝名称</value>
+  </data>
+  <data name="SP2" xml:space="preserve">
+    <value>校准</value>
+  </data>
+  <data name="SP3" xml:space="preserve">
+    <value>精密度 </value>
+  </data>
+  <data name="SP4" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="SP5" xml:space="preserve">
+    <value>有效性</value>
+  </data>
+  <data name="SP6" xml:space="preserve">
+    <value>衡量仪</value>
+  </data>
+  <data name="SP7" xml:space="preserve">
+    <value>比较器，单位为毫米</value>
+  </data>
+  <data name="SPTitle" xml:space="preserve">
+    <value>钢丝</value>
+  </data>
+  <data name="PopUpTitle1" xml:space="preserve">
+    <value>調整樞紐寬度</value>
+  </data>
+  <data name="PopUpTitle2" xml:space="preserve">
+    <value>設置周邊</value>
+  </data>
+  <data name="PopUpTxt21" xml:space="preserve">
+    <value>步驟1 : 進入初始位置</value>
+  </data>
+  <data name="PopUpTxt22" xml:space="preserve">
+    <value>（将车轮转到气嘴）</value>
+  </data>
+  <data name="PopUpTxt23" xml:space="preserve">
+    <value>第2步 : 点击右键重置到气嘴</value>
+  </data>
+  <data name="PopUpTxt24" xml:space="preserve">
+    <value>第3步 :  手動將車輪旋轉到最終位置</value>
+  </data>
+  <data name="PopUpTitle3" xml:space="preserve">
+    <value>对称控制</value>
+  </data>
+  <data name="PopUpTxt31" xml:space="preserve">
+    <value>步驟1 : 安置一個輪子</value>
+  </data>
+  <data name="PopUpTxt32" xml:space="preserve">
+    <value>第2步 : 按下雙手卸載輪子, 翻轉它180度,</value>
+  </data>
+  <data name="PopUpTxt33" xml:space="preserve">
+    <value>雙手点击两边按钮, 手动将輪子完全旋轉一圈</value>
+  </data>
+  <data name="PopUpTxt34" xml:space="preserve">
+    <value>第3步 : 對称錯誤</value>
+  </data>
+  <data name="PopUpTxt35" xml:space="preserve">
+    <value>第4步 : 對稱校正</value>
+  </data>
+  <data name="PopUpTitleID" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="PopUpTxtID" xml:space="preserve">
+    <value>請輸入您的用户 :</value>
+  </data>
+  <data name="PopUpTitlePass" xml:space="preserve">
+    <value>密碼</value>
+  </data>
+  <data name="PopUpTxtPass1" xml:space="preserve">
+    <value>請輸入管理員密碼：</value>
+  </data>
+  <data name="PopUpTxtPass2" xml:space="preserve">
+    <value>密碼錯誤！</value>
+  </data>
+  <data name="PopUpTitleShut" xml:space="preserve">
+    <value>關掉</value>
+  </data>
+  <data name="PopUpTxtShut" xml:space="preserve">
+    <value>系統關機？</value>
+  </data>
+  <data name="PopUpTitleStab" xml:space="preserve">
+    <value>穩定規模</value>
+  </data>
+</root>

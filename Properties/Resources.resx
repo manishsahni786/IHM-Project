@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ForceUk" xml:space="preserve">
+    <value>Spindle</value>
+  </data>
+  <data name="MainWindows" xml:space="preserve">
+    <value>MainWindow</value>
+  </data>
+  <data name="MesFr" xml:space="preserve">
+    <value>mm</value>
+  </data>
+  <data name="MesUk" xml:space="preserve">
+    <value>inch</value>
+  </data>
+  <data name="PoidsFr" xml:space="preserve">
+    <value>kg</value>
+  </data>
+  <data name="PoidsUk" xml:space="preserve">
+    <value>lb</value>
+  </data>
+  <data name="USC1" xml:space="preserve">
+    <value>Calcul Offset</value>
+  </data>
+  <data name="USC2" xml:space="preserve">
+    <value>Jointure Invisible</value>
+  </data>
+  <data name="USC3" xml:space="preserve">
+    <value>Erase Scratchs</value>
+  </data>
+  <data name="USC4" xml:space="preserve">
+    <value>Auto Refresh</value>
+  </data>
+  <data name="USC5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USC6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USC7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USCLabel1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USCLabel2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USCLabel3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USCLabel4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USCTitle" xml:space="preserve">
+    <value>Computation</value>
+  </data>
+  <data name="USD1" xml:space="preserve">
+    <value>Auto Zoom</value>
+  </data>
+  <data name="USD2" xml:space="preserve">
+    <value>Full Fit</value>
+  </data>
+  <data name="USD3B" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="USD3R" xml:space="preserve">
+    <value>Radar</value>
+  </data>
+  <data name="USD3XY" xml:space="preserve">
+    <value>XY</value>
+  </data>
+  <data name="USD4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USD5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USD6" xml:space="preserve">
+    <value>Min-Max</value>
+  </data>
+  <data name="USD7" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="USDLabel1" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="USDLabel2" xml:space="preserve">
+    <value>Real Time</value>
+  </data>
+  <data name="USDLabel3" xml:space="preserve">
+    <value>Tension Array</value>
+  </data>
+  <data name="USDLabel4" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="USDTitle" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="USG1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USG2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USG3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USG4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USG5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USG6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USG7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USGLabel1" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="USGLabel2" xml:space="preserve">
+    <value>Charts</value>
+  </data>
+  <data name="USGLabel3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USGLabel4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USGTitle" xml:space="preserve">
+    <value>Graphic</value>
+  </data>
+  <data name="USP1" xml:space="preserve">
+    <value>Teacher</value>
+  </data>
+  <data name="USP2" xml:space="preserve">
+    <value>Celebrate</value>
+  </data>
+  <data name="USP3" xml:space="preserve">
+    <value>No pedal (Auto)</value>
+  </data>
+  <data name="USP4" xml:space="preserve">
+    <value>Odd / Even</value>
+  </data>
+  <data name="USP5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USP6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USP7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USPLabel1" xml:space="preserve">
+    <value>Spoke analyser</value>
+  </data>
+  <data name="USPLabel2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USPLabel3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USPLabel4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USPr1" xml:space="preserve">
+    <value>Auto Print Wheel Ok</value>
+  </data>
+  <data name="USPr2" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="USPr3" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="USPr4" xml:space="preserve">
+    <value>Date / Hour</value>
+  </data>
+  <data name="USPr5" xml:space="preserve">
+    <value>Final value</value>
+  </data>
+  <data name="USPr6" xml:space="preserve">
+    <value>Torque Min</value>
+  </data>
+  <data name="USPr7" xml:space="preserve">
+    <value>Torque Max</value>
+  </data>
+  <data name="USPr8" xml:space="preserve">
+    <value>ID Manual</value>
+  </data>
+  <data name="USPrLabel1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USPrLabel2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USPrLabel3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USPrLabel4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="USPrTitle" xml:space="preserve">
+    <value>Printer</value>
+  </data>
+  <data name="USPTitle" xml:space="preserve">
+    <value>Performance</value>
+  </data>
+  <data name="USTitle" xml:space="preserve">
+    <value>User Settings</value>
+  </data>
+  <data name="USMTitle" xml:space="preserve">
+    <value>Manual</value>
+  </data>
+  <data name="DirTitle" xml:space="preserve">
+    <value>Directory</value>
+  </data>
+  <data name="Dir1" xml:space="preserve">
+    <value>SAVE</value>
+  </data>
+  <data name="Dir2" xml:space="preserve">
+    <value>LOAD</value>
+  </data>
+  <data name="Dir3" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="FW1" xml:space="preserve">
+    <value>WHEEL NAME</value>
+  </data>
+  <data name="FW2" xml:space="preserve">
+    <value>HUB</value>
+  </data>
+  <data name="FW3" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="FW4" xml:space="preserve">
+    <value>Offset</value>
+  </data>
+  <data name="FW5" xml:space="preserve">
+    <value>RIM</value>
+  </data>
+  <data name="FW6" xml:space="preserve">
+    <value>Perimeter</value>
+  </data>
+  <data name="FW8" xml:space="preserve">
+    <value>SPOKE ANALYSER</value>
+  </data>
+  <data name="FW9" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="FW10" xml:space="preserve">
+    <value>Numbering</value>
+  </data>
+  <data name="FW11" xml:space="preserve">
+    <value>BIKE</value>
+  </data>
+  <data name="FW12" xml:space="preserve">
+    <value>Side</value>
+  </data>
+  <data name="FW13" xml:space="preserve">
+    <value>Pair ID</value>
+  </data>
+  <data name="FW14" xml:space="preserve">
+    <value>PERFORMANCE</value>
+  </data>
+  <data name="FW15" xml:space="preserve">
+    <value>GEOMETRY</value>
+  </data>
+  <data name="FW16" xml:space="preserve">
+    <value>SIDE TO SIDE</value>
+  </data>
+  <data name="FW17" xml:space="preserve">
+    <value>UP AND DOWN</value>
+  </data>
+  <data name="FW18" xml:space="preserve">
+    <value>OFFSET</value>
+  </data>
+  <data name="FW19" xml:space="preserve">
+    <value>SPOKE TENSION</value>
+  </data>
+  <data name="FW20" xml:space="preserve">
+    <value>AVERAGE ALL SPOKES</value>
+  </data>
+  <data name="FW21" xml:space="preserve">
+    <value>EACH SPOKE</value>
+  </data>
+  <data name="FW22" xml:space="preserve">
+    <value>LEFT</value>
+  </data>
+  <data name="FW23" xml:space="preserve">
+    <value>RIGHT</value>
+  </data>
+  <data name="FW24" xml:space="preserve">
+    <value>MAX</value>
+  </data>
+  <data name="FW25" xml:space="preserve">
+    <value>MIN</value>
+  </data>
+  <data name="FW26" xml:space="preserve">
+    <value>STABILIZATION</value>
+  </data>
+  <data name="FW27" xml:space="preserve">
+    <value>Number of hit / kg</value>
+  </data>
+  <data name="FW7s" xml:space="preserve">
+    <value>Symmetry</value>
+  </data>
+  <data name="FW7c" xml:space="preserve">
+    <value>control</value>
+  </data>
+  <data name="FW28" xml:space="preserve">
+    <value>Calibration</value>
+  </data>
+  <data name="LogTitle" xml:space="preserve">
+    <value>LOGIN</value>
+  </data>
+  <data name="SP1" xml:space="preserve">
+    <value>SPOKE NAME</value>
+  </data>
+  <data name="SP2" xml:space="preserve">
+    <value>CALIBRATION</value>
+  </data>
+  <data name="SP3" xml:space="preserve">
+    <value>ACCURACY</value>
+  </data>
+  <data name="SP4" xml:space="preserve">
+    <value>DATE</value>
+  </data>
+  <data name="SP5" xml:space="preserve">
+    <value>VALIDITY</value>
+  </data>
+  <data name="SP6" xml:space="preserve">
+    <value>GAUGE</value>
+  </data>
+  <data name="SP7" xml:space="preserve">
+    <value>COMPARATOR IN MM</value>
+  </data>
+  <data name="SPTitle" xml:space="preserve">
+    <value>SPOKE</value>
+  </data>
+  <data name="PopUpTitle1" xml:space="preserve">
+    <value>ADJUST HUB WIDTH</value>
+  </data>
+  <data name="PopUpTitle2" xml:space="preserve">
+    <value>SET PERIMETER</value>
+  </data>
+  <data name="PopUpTxt21" xml:space="preserve">
+    <value>STEP 1. GO IN HOME POSITION</value>
+  </data>
+  <data name="PopUpTxt22" xml:space="preserve">
+    <value>(Rotate wheel to valve hole)</value>
+  </data>
+  <data name="PopUpTxt23" xml:space="preserve">
+    <value>STEP 2. PRESS Acquisition Button to Reset Value</value>
+  </data>
+  <data name="PopUpTxt24" xml:space="preserve">
+    <value>STEP 3. Manually rotate wheel up to final position</value>
+  </data>
+  <data name="PopUpTitle3" xml:space="preserve">
+    <value>SYMMETRY CONTROL</value>
+  </data>
+  <data name="PopUpTxt31" xml:space="preserve">
+    <value>STEP 1. LOAD A WHEEL</value>
+  </data>
+  <data name="PopUpTxt32" xml:space="preserve">
+    <value>STEP 2.  UNLOAD THE WHEEL, FLIP IT,</value>
+  </data>
+  <data name="PopUpTxt33" xml:space="preserve">
+    <value>LOAD WHEEL, ROTATE WHEEL ENTIRELY</value>
+  </data>
+  <data name="PopUpTxt34" xml:space="preserve">
+    <value>STEP 3. SYMMETRY ERROR</value>
+  </data>
+  <data name="PopUpTxt35" xml:space="preserve">
+    <value>STEP 4. SYMMETRY CORRECTION</value>
+  </data>
+  <data name="PopUpTitleID" xml:space="preserve">
+    <value>WHEEL INFO</value>
+  </data>
+  <data name="PopUpTxtID" xml:space="preserve">
+    <value>Please Enter ID :</value>
+  </data>
+  <data name="PopUpTitlePass" xml:space="preserve">
+    <value>PASSWORD</value>
+  </data>
+  <data name="PopUpTxtPass1" xml:space="preserve">
+    <value>Please Enter Admin Password:</value>
+  </data>
+  <data name="PopUpTxtPass2" xml:space="preserve">
+    <value>Incorrect Password!</value>
+  </data>
+  <data name="PopUpTitleShut" xml:space="preserve">
+    <value>Shutdown</value>
+  </data>
+  <data name="PopUpTxtShut" xml:space="preserve">
+    <value>Shutdown System ?</value>
+  </data>
+  <data name="PopUpTitleStab" xml:space="preserve">
+    <value>Stabilisation Scale</value>
+  </data>
+  <data name="PopUpTitleParams" xml:space="preserve">
+    <value>Edit Parameters</value>
+  </data>
+  <data name="FW29" xml:space="preserve">
+    <value>Nb hit/Nb turn</value>
+  </data>
+  <data name="PopUpTitleSave" xml:space="preserve">
+    <value>Saving</value>
+  </data>
+  <data name="PopUpTxtSave1" xml:space="preserve">
+    <value>Save changes ?</value>
+  </data>
+  <data name="PopUpTxtSave2" xml:space="preserve">
+    <value>Overwriting wheel number :</value>
+  </data>
+</root>

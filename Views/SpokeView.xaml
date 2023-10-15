@@ -1,0 +1,785 @@
+﻿<UserControl x:Class="MireWpf.Views.SpokeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:p="clr-namespace:MireWpf.Properties"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:MireWpf.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" x:Name="DirectoryControl"
+             d:DesignHeight="750" d:DesignWidth="1600" Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+             d:DataContext="{d:DesignInstance viewModels:SpokeViewModel}" Margin="0, 5">
+    <UserControl.Resources>
+        <Style x:Key="styleTextbox">
+            <Setter Property="TextBox.VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="TextBox.TextAlignment" Value="Center"></Setter>
+            <Setter Property="TextBox.FontWeight" Value="Bold" />
+            <Setter Property="TextBox.FontSize" Value="25" />
+        </Style>
+        <Style x:Key="styleTextBox">
+            <Setter Property="TextBox.VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="TextBox.TextAlignment" Value="Center"></Setter>
+            <Setter Property="TextBox.FontWeight" Value="Bold" />
+            <Setter Property="TextBox.FontSize" Value="25" />
+            <Setter Property="TextBox.IsEnabled" Value="False"/>
+            <EventSetter Event="TextBox.GotKeyboardFocus" Handler="run_MouseEnter"/>
+        </Style>
+        <Style x:Key="styleTextBoxData">
+            <EventSetter Event="TextBox.GotKeyboardFocus" Handler="run_MouseEnterData"/>
+        </Style>
+            <!--<Style x:Key="Numbers" TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="10" />
+            <EventSetter Event="GotKeyboardFocus" Handler="run_MouseEnter"/>
+        </Style>-->
+        <Style x:Key="KeypadBtn" TargetType="{x:Type Button}">
+            <EventSetter Event="Click" Handler="key_Click" />
+        </Style>
+        <Style x:Key="KeypadComma" TargetType="{x:Type Button}">
+            <EventSetter Event="Click" Handler="key_Click" />
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Width="{Binding ActualWidth, ElementName=DirectoryControl}" Height="{Binding ActualHeight, ElementName=DirectoryControl}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderBrush="#41719c" BorderThickness="3" CornerRadius="20" Margin="0, 10, 10, 10">
+                <DataGrid AlternationCount="2" IsReadOnly="True" ItemsSource="{Binding ListSpokes}" Margin="7,13,13,7"
+                                  HeadersVisibility="None" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible"
+                                  BorderBrush="White" Background="White" HorizontalGridLinesBrush="White" Foreground="Black"
+                                  VerticalGridLinesBrush="White" RowBackground="#FFd2deef" AlternatingRowBackground="#FFeaeff7" 
+                                  SelectionMode="Single" Name="SpokeList">
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Pink"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Pink"/>
+                    </DataGrid.Resources>
+                    <DataGrid.Style>
+                        <Style>
+                            <Setter Property="DataGrid.SelectedIndex" Value="{Binding SpokeSelectedIndex}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding FocusDataGrid}" Value="True">
+                                    <Setter Property="FocusManager.FocusedElement" Value="{Binding ElementName=SpokeList}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Style>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SpokeSelectionChangeCommand}" CommandParameter="{Binding SelectedItem.Index, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="50" Header="#" FontSize="28" Binding="{Binding Index, StringFormat='00'}" >
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="#5b9bd5"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.FontSize" Value="22"/>
+                                    <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.Padding" Value="0, 20"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="4*" Header="Name" FontSize="28" Binding="{Binding Name}">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="#5b9bd5"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.FontSize" Value="22"/>
+                                    <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Stretch"/>
+                                    <Setter Property="TextBlock.Padding" Value="0, 20"/>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <Border Grid.Column="1" BorderBrush="Pink" BorderThickness="3" CornerRadius="20" Margin="0, 10, 0, 10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="6*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Content="{x:Static p:Resources.SP1}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                    <Border Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <TextBox Text="{Binding DataSpokeNum}">
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource styleTextbox}">
+                                    <Setter Property="TextBox.IsReadOnly" Value="True"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                            <Setter Property="TextBox.Background" Value="#bdd7ee"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+                    <Border Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <TextBox Text="{Binding DataSpokeName, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding UpdateValueCommand}" CommandParameter="DataSpokeName"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource styleTextbox}">
+                                    <Setter Property="TextBox.IsReadOnly" Value="True"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                            <Setter Property="TextBox.IsReadOnly" Value="False"/>
+                                            <Setter Property="TextBox.Background" Value="#92d050"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+
+                    <Label Grid.Column="0" Grid.Row="1" Content="{x:Static p:Resources.SP2}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                    <Image Grid.Column="1" Grid.Row="1" Source="pack://siteoforigin:,,,/Resources/Icons/alpha.png" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 10, 0"/>
+                    <Border Grid.Column="2" Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <TextBox Text="{Binding RegrPoliOrdre2, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding UpdateValueCommand}" CommandParameter="RegrPoliOrdre2"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource styleTextBox}">
+                                    <Setter Property="TextBox.IsReadOnly" Value="True"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                            <Setter Property="TextBox.IsReadOnly" Value="False"/>
+                                            <Setter Property="TextBox.IsEnabled" Value="True"/>
+                                            <Setter Property="TextBox.Background" Value="#92d050"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+                    <Image Grid.Column="3" Grid.Row="1" Source="pack://siteoforigin:,,,/Resources/Icons/beta.png" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 10, 0"/>
+                    <Border Grid.Column="4" Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <TextBox Text="{Binding RegrPoliOrdre1, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding UpdateValueCommand}" CommandParameter="RegrPoliOrdre1"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource styleTextBox}">
+                                    <Setter Property="TextBox.IsReadOnly" Value="True"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                            <Setter Property="TextBox.IsReadOnly" Value="False"/>
+                                            <Setter Property="TextBox.IsEnabled" Value="True"/>
+                                            <Setter Property="TextBox.Background" Value="#92d050"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+                    <Image Grid.Column="5" Grid.Row="1" Source="pack://siteoforigin:,,,/Resources/Icons/gamma.png" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 10, 0"/>
+                    <Border Grid.Column="6" Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <TextBox Text="{Binding RegrPoliOrdre0, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding UpdateValueCommand}" CommandParameter="RegrPoliOrdre0"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource styleTextBox}">
+                                    <Setter Property="TextBox.IsReadOnly" Value="True"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                            <Setter Property="TextBox.IsReadOnly" Value="False"/>
+                                            <Setter Property="TextBox.IsEnabled" Value="True"/>
+                                            <Setter Property="TextBox.Background" Value="#92d050"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+                    <Label Grid.Column="7" Grid.Row="1" Content="{x:Static p:Resources.SP3}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                    <Border Grid.Column="8" Grid.Row="1" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <TextBox Text="{Binding Accuracy}">
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource styleTextbox}">
+                                    <Setter Property="TextBox.IsReadOnly" Value="True"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                            <Setter Property="TextBox.Background" Value="#bdd7ee"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+
+                    <Label Grid.Column="0" Grid.Row="2" Content="{x:Static p:Resources.SP4}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                    <Border Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <TextBox Text="{Binding DS_Date}">
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource styleTextbox}">
+                                    <Setter Property="TextBox.IsReadOnly" Value="True"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                            <Setter Property="TextBox.Background" Value="#bdd7ee"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+                    <Label Grid.Column="5" Grid.Row="2" Content="{x:Static p:Resources.SP5}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                    <Border Grid.Column="6" Grid.ColumnSpan="3" Grid.Row="2" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <TextBox Text="{Binding DS_Validity, UpdateSourceTrigger=PropertyChanged}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding UpdateValueCommand}" CommandParameter="DS_Validity"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <TextBox.Style>
+                                <Style BasedOn="{StaticResource styleTextbox}">
+                                    <Setter Property="TextBox.IsReadOnly" Value="True"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                            <Setter Property="TextBox.IsReadOnly" Value="False"/>
+                                            <Setter Property="TextBox.Background" Value="#92d050"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+
+                    <Grid Grid.Column="0" Grid.ColumnSpan="9" Grid.Row="3" Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="960"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Content="{x:Static p:Resources.SP6}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="16">
+                            <Label.LayoutTransform>
+                                <RotateTransform Angle="270"/>
+                            </Label.LayoutTransform>
+                        </Label>
+                        <Label Grid.Column="2" Grid.Row="2" Content="{x:Static p:Resources.SP7}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+
+                        <UniformGrid Grid.Column="1" Grid.Row="0" Rows="11" Height="300">
+                            <Label Content="200" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="180" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="160" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="140" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="120" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="100" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="80" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="60" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="40" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="12"/>
+                        </UniformGrid>
+
+                        <UniformGrid Grid.Column="2" Grid.Row="1" Columns="10" VerticalAlignment="Top" Width="920">
+                            <Label Content="0,0" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="0,5" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="1,0" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="1,5" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="2,0" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="2,5" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="3,0" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="3,5" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="4,0" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            <Label Content="4,5" HorizontalAlignment="left" VerticalAlignment="Center" FontSize="12"/>
+                            
+                        </UniformGrid>
+
+                        <Grid Grid.Column="2" Grid.Row="0" Width="920" Height="275">
+                            <UniformGrid Rows="10">
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                                <Line X1="-20" X2="1500" Y1="0" Y2="0" Stroke="Black" StrokeThickness="1"/>
+                            </UniformGrid>
+                        </Grid>
+
+                        <Grid Grid.Column="2" Grid.Row="0" Margin="0, 0, 0,12" VerticalAlignment="Bottom" Width="920" Height="5">
+                            <UniformGrid Columns="10" Margin="0,0,0,0">
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                                <Rectangle Width="1" Height="40" Stroke="Black" StrokeThickness="1" HorizontalAlignment="left"/>
+                            </UniformGrid>
+                        </Grid>
+
+                        <Border Grid.Column="2" Grid.Row="0" BorderBrush="Black" BorderThickness="0" Width="920" Height="275">
+                            <Border.Style>
+                                <Style>
+                                    <Setter Property="Border.Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                            <Setter Property="Border.Visibility" Value="Hidden"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <ItemsControl ItemsSource="{Binding RectItems}" Width="920" Height="275">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style TargetType="ContentPresenter">
+                                        <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                                        <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="DarkOrange"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+
+                        <Border Grid.Column="2" Grid.Row="0" BorderBrush="Black" BorderThickness="1, 0, 0, 1" Width="920" Height="275">
+                            <Polyline Stroke="#5b9bd5" StrokeThickness="2" Points="{Binding ChartPointCollection}" Width="920" Height="275"/>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="180"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.Style>
+                    <Style>
+                        <Setter Property="Grid.Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                <Setter Property="Grid.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Margin="2">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding CalibCommand}" CommandParameter=""/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <Image.Style>
+                        <Style>
+                            <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/BPCalibrationOFF.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding DmdCalibRun}" Value="1">
+                                    <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/BPCalibrationOn.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image >
+                <Label Grid.Column="1" Grid.Row="0" Content="Press to Calibrate" VerticalAlignment="Center"/>
+                <Image Grid.Column="0" Grid.Row="1" Source="pack://siteoforigin:,,,/Resources/Images/
+                       .JPG" HorizontalAlignment="Center" Margin="2"/>
+                <Image Grid.Column="0" Grid.Row="2" Source="pack://siteoforigin:,,,/Resources/Icons/dashboard.png" HorizontalAlignment="Center" Margin="2"/>
+                <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="2" Margin="2">
+                    <TextBlock Text="{Binding CalMesurePeson, StringFormat='0.00'}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                </Border>
+                <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="2" Margin="2">
+                    <TextBlock Text="{Binding CalMesureTension}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                </Border>
+
+                <DataGrid Grid.Column="2" Grid.ColumnSpan="20" Grid.Row="0" Grid.RowSpan="3" ItemsSource="{Binding ListCalib}" AutoGenerateColumns="False" IsReadOnly="True"
+                      HeadersVisibility="None" HorizontalScrollBarVisibility="Hidden" BorderBrush="White" Background="White"
+                      Foreground="Black" HorizontalGridLinesBrush="White" VerticalGridLinesBrush="White"
+                      SelectionMode="Single" RowHeight="55">
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Pink"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Pink"/>
+                    </DataGrid.Resources>
+                    <DataGrid.LayoutTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="90"/>
+                            <MatrixTransform Matrix="-1,0,0,1,0,0"/>
+                        </TransformGroup>
+                    </DataGrid.LayoutTransform>
+                    <DataGrid.Style>
+                        <Style>
+                            <Setter Property="DataGrid.SelectedIndex" Value="{Binding SpokeRayonSelectedIndex}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding FocusDataGrid}" Value="True">
+                                    <Setter Property="FocusManager.FocusedElement" Value="{Binding ElementName=SpokeList}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Style>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SpokeRayonSelectionChangeCommand}" CommandParameter="{Binding SelectedItem.Index, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" FontSize="18" FontWeight="Bold" Binding="{Binding Index}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="false">
+                                            <Setter Property="Background" Value="#5b9bd5"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="-90"/>
+                                                <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                            </TransformGroup>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="*" FontSize="16" Binding="{Binding Peson}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource styleTextBoxData}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="false">
+                                            <Setter Property="Background" Value="#d2deef"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="-90"/>
+                                                <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                            </TransformGroup>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+
+                        <DataGridTextColumn Width="*" FontSize="16" Binding="{Binding Comparator, StringFormat='0.00'}">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell" BasedOn="{StaticResource styleTextBoxData}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="false">
+                                            <Setter Property="Background" Value="#eaeff7"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                    <Setter Property="TextBlock.VerticalAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    <Setter Property="LayoutTransform">
+                                        <Setter.Value>
+                                            <TransformGroup>
+                                                <RotateTransform Angle="-90"/>
+                                                <ScaleTransform ScaleX="1" ScaleY="-1" />
+                                            </TransformGroup>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.Style>
+                    <Style>
+                        <Setter Property="Grid.Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                <Setter Property="Grid.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0" Source="pack://siteoforigin:,,,/Resources/Icons/calculator.png" Margin="5, 0, 5, 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding ComputeCommand}" CommandParameter=""/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+                <Image Grid.Column="1" Source="pack://siteoforigin:,,,/Resources/Icons/save.png" Margin="0, 0, 10, 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding EditAcceptCommand}" CommandParameter=""/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="10, 0, 10, 0">
+                <Grid.Style>
+                    <Style>
+                        <Setter Property="Grid.Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                <Setter Property="Grid.Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="pack://siteoforigin:,,,/Resources/Icons/ok.png" Margin="0, 0, 0, 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding SpokeOkCommand}" CommandParameter=""/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+                <Image Grid.Column="1" Source="pack://siteoforigin:,,,/Resources/Icons/cancel.png" Margin="0, 0, 0, 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding SpokeCancelCommand}" CommandParameter=""/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3" Background="#88000000" Margin="00">
+
+            <Grid.Style>
+                <Style>
+                    <Setter Property="Label.Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowShutPopUp}" Value="true">
+                            <Setter Property="Grid.Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <Grid Background="Transparent" Width="1000" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Name="BorderShut2">
+                    <Grid>
+                        <Border Name="maskShut" Background="White" CornerRadius="10"/>
+
+                        <Grid Background="#5b9bd5" Margin="0,0,0,0">
+                            <Grid.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=maskShut}"/>
+                            </Grid.OpacityMask>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Bold" Foreground="White" Content="{x:Static p:Resources.PopUpTitleShut}"/>
+                            </StackPanel>
+                        </Grid>
+
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Margin="0,5,0,0">
+                    <Grid>
+                        <Border Name="maskShut2" Background="White" CornerRadius="10"/>
+
+                        <Grid Background="White" Margin="0,0,0,0">
+                            <Grid.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=maskShut2}"/>
+                            </Grid.OpacityMask>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label FontSize="48" FontFamily="Ariel" FontWeight="Bold" Content="{x:Static p:Resources.PopUpTxtShut}" HorizontalAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/ok.png" Margin="10,5,0,5">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                                            <i:InvokeCommandAction Command="{Binding ShutPopUpOkCommand}" CommandParameter=""/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Image>
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/cancel.png" Margin="10,5">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                                            <i:InvokeCommandAction Command="{Binding ShutPopUpCancelCommand}" CommandParameter=""/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Image>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                </Border>
+
+
+
+            </Grid>
+
+        </Grid>
+
+        <Popup Name="popLink" StaysOpen="True" Placement="Right" PopupAnimation="Slide" AllowsTransparency="True">
+            <Border BorderBrush="Beige" BorderThickness="2" Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="75"  />
+                        <ColumnDefinition Width="75" />
+                        <ColumnDefinition Width="75" />
+                        <ColumnDefinition Width="75" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Grid.ColumnSpan="4" Background="Black">
+                        <TextBox x:Name="keypadScreen" BorderBrush="Aqua" BorderThickness="3" FontSize="30" Margin="3" TextAlignment="Left" FontStyle="Italic">
+                            <TextBox.Style>
+                                <Style>
+                                    <Setter Property="TextBox.IsReadOnly" Value="True"/>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                    </Border>
+                    <Button Content="_7" Style="{StaticResource KeypadBtn}" Grid.Row="1" Grid.Column="0" FontSize="25"/>
+                    <Button Content="_8" Style="{StaticResource KeypadBtn}" Grid.Row="1" Grid.Column="1" FontSize="25" />
+                    <Button Content="_9" Style="{StaticResource KeypadBtn}" Grid.Row="1" Grid.Column="2" FontSize="25"/>
+                    <Button Content="Cancel" Style="{StaticResource KeypadBtn}" Grid.Row="1" Grid.Column="3" FontSize="20" FontWeight="Bold"/>
+                    <Button Content="&lt;" Style="{StaticResource KeypadBtn}" Grid.Row="2" Grid.Column="3" FontSize="20" FontWeight="Bold"/>
+                    <Button Content="_4" Style="{StaticResource KeypadBtn}" Grid.Row="2" Grid.Column="0" FontSize="25"/>
+                    <Button Content="_5" Style="{StaticResource KeypadBtn}" Grid.Row="2" Grid.Column="1" FontSize="25"/>
+                    <Button Content="_6" Style="{StaticResource KeypadBtn}" Grid.Row="2" Grid.Column="2" FontSize="25"/>
+                    <Button Content="_1" Style="{StaticResource KeypadBtn}" Grid.Row="3" Grid.Column="0" FontSize="25"/>
+                    <Button Content="_2" Style="{StaticResource KeypadBtn}" Grid.Row="3" Grid.Column="1" FontSize="25"/>
+                    <Button Content="_3" Style="{StaticResource KeypadBtn}" Grid.Row="3" Grid.Column="2" FontSize="25"/>
+                    <Button Content="Clear" Style="{StaticResource KeypadBtn}" Grid.Row="3" Grid.Column="3" FontSize="20" FontWeight="Bold" IsCancel="True"/>
+                    <Button Content="Enter" Style="{StaticResource KeypadBtn}" Grid.Row="4" Grid.Column="3" FontSize="20" FontWeight="Bold" IsDefault="True"/>
+                    <Button Content="_-" Style="{StaticResource KeypadBtn}" Grid.Row="4" Grid.Column="0"  FontSize="25"/>
+                    <Button Content="_0" Style="{StaticResource KeypadBtn}" Grid.Row="4" Grid.Column="1"  FontSize="25"/>
+                    <Button Content="_." Style="{StaticResource KeypadComma}" Grid.Row="4" Grid.Column="2" FontSize="25"/>
+                </Grid>
+            </Border>
+        </Popup>
+
+    </Grid>
+</UserControl>

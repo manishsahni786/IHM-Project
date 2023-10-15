@@ -1,0 +1,570 @@
+﻿<UserControl x:Class="MireWpf.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:p="clr-namespace:MireWpf.Properties"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:MireWpf.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" x:Name="LoginControl"
+             d:DesignHeight="897.2" d:DesignWidth="1588.8" 
+             Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+             d:DataContext="{d:DesignInstance viewModels:LoginViewModel}" Loaded="LoginControl_Loaded" >
+    <Viewbox HorizontalAlignment="Stretch" Stretch="Fill">
+        <Grid  Height="{Binding ActualHeight, ElementName=LoginControl}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                
+            </Grid.ColumnDefinitions>
+            <Viewbox Stretch="UniformToFill">
+
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" Margin="1 2, 0, 0">
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="1"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="white"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="1">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <StackPanel>
+
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user01.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0" Stretch="Uniform"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser01" Content="{Binding Username01}"></Label>
+
+                        </StackPanel>
+
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="2"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="2">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user02.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser02" Content="{Binding Username02}"></Label>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="3"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="3">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel d:IsLocked="True">
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user03.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser03" Content="{Binding Username03}"></Label>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="4"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="4">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user04.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser04" Content="{Binding Username04}"></Label>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="5"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="5">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user05.png" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" x:Name="txtUser05" Content="{Binding Username05}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+            </Viewbox>
+            <Viewbox Stretch="UniformToFill" Grid.Row="1" Grid.Column="0" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="6"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="6">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user06.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser06" Content="{Binding Username06}"></Label>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="7"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="7">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user07.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser07" Content="{Binding Username07}"></Label>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="8"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="8">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user08.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser08" Content="{Binding Username08}"></Label>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="9"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="9">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user09.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser09" Content="{Binding Username09}"></Label>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="10"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="10">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user10.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser10" Content="{Binding Username10}"></Label>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Viewbox>
+            <Viewbox Stretch="UniformToFill"  Grid.Row="2" Grid.Column="0" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 2, 0, 0">
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="11"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="11">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel >
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user11.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser11" Content="{Binding Username11}"></Label>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="12"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="12">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user12.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" x:Name="txtUser12" Content="{Binding Username12}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="13"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="13">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel >
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user13.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser13" Content="{Binding Username13}"></Label>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="14"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="14">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user14.png" VerticalAlignment="Center" Height="150" Margin="10, 0, 10, 0" Width="150"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser14" Content="{Binding Username14}"></Label>
+                        </StackPanel>
+                    </Border>
+
+                    <Border BorderThickness="0" Padding="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding SelectUserCommand}" CommandParameter="15"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Border.Style>
+                            <Style>
+                                <Setter Property="Border.BorderBrush" Value="White"></Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EditUserId}" Value="15">
+                                        <Setter Property="Border.BorderBrush" Value="Goldenrod"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <StackPanel>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/user15.png" Height="150" Margin="10,0,10,0" Width="150" VerticalAlignment="Center"/>
+                            <Label HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" Name="txtUser15" Content="{Binding Username15}"></Label>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Viewbox>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.Style>
+                    <Style>
+                        <Setter Property="Grid.Visibility" Value="Hidden"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding EditMode}" Value="1">
+                                <Setter Property="Grid.Visibility" Value="Visible"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Goldenrod" BorderThickness="3" Padding="2" VerticalAlignment="Top" Height="80">
+                    <TextBox Height="60" MaxLength="20" FontSize="36" FontWeight="Bold" TextAlignment="Center" BorderThickness="0" Text="{Binding EditUserName}" Name="txtUserName"></TextBox>
+
+                </Border>
+
+                <Image Grid.Row="0" Grid.Column="1" Source="pack://siteoforigin:,,,/Resources/Icons/save.png" VerticalAlignment="Top" HorizontalAlignment="Center" Height="80">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding SaveUserNameCommand}" CommandParameter="{Binding Text, ElementName=txtUserName}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+
+
+            
+
+            <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Background="#88000000" Margin="-100">
+                <Grid.Style>
+                    <Style>
+                        <Setter Property="Label.Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ShowPasswordWindow}" Value="true">
+                                <Setter Property="Grid.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid Background="Transparent" Width="800" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Name="Border">
+
+                        <Grid>
+                            <Border Name="mask" Background="White" CornerRadius="10"/>
+
+                            <Grid Background="#5b9bd5">
+                                <Grid.OpacityMask>
+                                    <VisualBrush Visual="{Binding ElementName=mask}"/>
+                                </Grid.OpacityMask>
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="bold" Foreground="White" Content="{x:Static p:Resources.PopUpTitlePass}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Margin="0, 5, 0, 0">
+                        <Grid>
+                            <Border Name="mask2" Background="White" CornerRadius="10"/>
+
+                            <Grid Background="White">
+                                <Grid.OpacityMask>
+                                    <VisualBrush Visual="{Binding ElementName=mask2}"/>
+                                </Grid.OpacityMask>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="3*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                                    <Label FontSize="48" FontFamily="Ariel" FontWeight="bold" Content="{x:Static p:Resources.PopUpTxtPass1}" HorizontalAlignment="Center"/>
+                                    <TextBox FontSize="48" BorderBrush="DarkSlateBlue" BorderThickness="2" Width="400" HorizontalAlignment="Center" Text="{Binding PasswordEntered, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <Label FontSize="36" FontFamily="Ariel" FontWeight="bold" Content="{x:Static p:Resources.PopUpTxtPass2}" HorizontalAlignment="Center" Foreground="Firebrick">
+                                        <Label.Style>
+                                            <Style>
+                                                <Setter Property="Label.Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ShowPasswordError}" Value="true">
+                                                        <Setter Property="Grid.Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Image Source="pack://siteoforigin:,,,/Resources/Icons/ok.png" Margin="10, 5, 0, 5">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction Command="{Binding PasswordOkCommand}" CommandParameter=""/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Image>
+                                    <Image Source="pack://siteoforigin:,,,/Resources/Icons/cancel.png" Margin="10, 5">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction Command="{Binding PasswordCancelCommand}" CommandParameter=""/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Image>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="3" Background="#88000000" Margin="00">
+
+                <Grid.Style>
+                    <Style>
+                        <Setter Property="Label.Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ShowShutPopUp}" Value="true">
+                                <Setter Property="Grid.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <Grid Background="Transparent" Width="1000" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Name="BorderShut2">
+                        <Grid>
+                            <Border Name="maskShut" Background="White" CornerRadius="10"/>
+
+                            <Grid Background="#5b9bd5" Margin="0,0,0,0">
+                                <Grid.OpacityMask>
+                                    <VisualBrush Visual="{Binding ElementName=maskShut}"/>
+                                </Grid.OpacityMask>
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="bold" Foreground="White" Content="{x:Static p:Resources.PopUpTitleShut}"/>
+                                </StackPanel>
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Row="1" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Margin="0,5,0,0">
+                        <Grid>
+                            <Border Name="maskShut2" Background="White" CornerRadius="10"/>
+
+                            <Grid Background="White" Margin="0,0,0,0">
+                                <Grid.OpacityMask>
+                                    <VisualBrush Visual="{Binding ElementName=maskShut2}"/>
+                                </Grid.OpacityMask>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="3*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Label FontSize="48" FontFamily="Ariel" FontWeight="bold" Content="{x:Static p:Resources.PopUpTxtShut}" HorizontalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Image Source="pack://siteoforigin:,,,/Resources/Icons/ok.png" Margin="10,5,0,5">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction Command="{Binding ShutPopUpOkCommand}" CommandParameter=""/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Image>
+                                    <Image Source="pack://siteoforigin:,,,/Resources/Icons/cancel.png" Margin="10,5">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction Command="{Binding ShutPopUpCancelCommand}" CommandParameter=""/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Image>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
+                    </Border>
+
+
+
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Viewbox>
+</UserControl>

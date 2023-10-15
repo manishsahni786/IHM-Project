@@ -1,0 +1,446 @@
+﻿<Window x:Class="MireWpf.Views.MainWindow"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+xmlns:p="clr-namespace:MireWpf.Properties"
+xmlns:views="clr-namespace:MireWpf.Views" 
+xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+xmlns:viewModels="clr-namespace:MireWpf.ViewModels"
+mc:Ignorable="d"
+xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+xmlns:models="clr-namespace:MireWpf.Models"
+d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
+        
+Title="MainWindows V62" Height="900" Width="1600" MinHeight="800" MinWidth="1400"
+WindowState="Maximized" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}">
+
+    <Grid Margin="5">
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="9*"></RowDefinition>
+
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+
+        <Border Grid.Row="1" BorderBrush="LightSkyBlue" BorderThickness="2" CornerRadius="1" Name="Border">
+
+            <Grid>
+                <Border Name="mask" Background="Gray" CornerRadius="9"/>
+
+                <Grid Background="Gray" Height="78" >
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=mask}"/>
+                    </Grid.OpacityMask>
+
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/home.png" Height="68" Width="68" Margin="10,5,0,5" Cursor="Hand" Stretch="UniformToFill">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding SwitchScreenCommand}" CommandParameter="{x:Static models:EScreen.MireScreen}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Image.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.MireScreen}">
+                                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+
+
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/book.png" Margin="10, 5, 0, 5" Cursor="Hand" Stretch="UniformToFill">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding SwitchScreenCommand}" CommandParameter="{x:Static models:EScreen.DirectoryScreen}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Image.Style>
+                                    <Style>
+                                        <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.MireScreen}">
+                                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+
+
+                            <!--
+    <Image Source="pack://siteoforigin:,,,/Resources/Icons/edit.png" Margin="10, 5, 0, 5">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonUp">
+                <i:InvokeCommandAction Command="{Binding SwitchScreenCommand}" CommandParameter="{x:Static models:EScreen.LoginScreen}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <Image.Style>
+            <Style>
+                <Setter Property="Image.Visibility" Value="Collapsed"></Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.MireScreen}">
+                        <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Image.Style>
+    </Image> -->
+
+
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/print.png" Margin="10, 5, 0, 5" Cursor="Hand" Stretch="UniformToFill">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding PrintCommand}" CommandParameter=""/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Image.Style>
+                                    <Style>
+                                        <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.MireScreen}">
+                                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+
+                            <Border Margin="10, 5, 0, 5">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding EditUsersCommand}" CommandParameter=""/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Border.Style>
+                                    <Style>
+                                        <Setter Property="Border.Background" Value="Transparent"/>
+                                        <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.LoginScreen}"/>
+                                                    <Condition Binding="{Binding Admin}" Value="1"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding LoginEditMode}" Value="1">
+                                                <Setter Property="Border.Background" Value="Goldenrod"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/pencil.png" Cursor="Hand" Stretch="UniformToFill"/>
+                            </Border>
+
+                            <Border Margin="10, 5, 0, 5">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding EditDirectoryCommand}" CommandParameter=""/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Border.Style>
+                                    <Style>
+                                        <Setter Property="Border.Background" Value="Transparent"/>
+                                        <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.DirectoryScreen}"/>
+                                                    <Condition Binding="{Binding Admin}" Value="1"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding DirectoryEditMode}" Value="1">
+                                                <Setter Property="Border.Background" Value="Goldenrod"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/pencil.png"/>
+                            </Border>
+
+                            <Border Margin="10, 5, 0, 5">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding EditSpokeCommand}" CommandParameter=""/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Border.Style>
+                                    <Style>
+                                        <Setter Property="Border.Background" Value="red"/>
+                                        <Setter Property="UIElement.Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.SpokeScreen}"/>
+                                                    <!--   <Condition Binding="{Binding Admin}" Value="0"/>-->
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                            <DataTrigger Binding="{Binding SpokeEditMode}" Value="1">
+                                                <Setter Property="Border.Background" Value="Green"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/pencil.png"/>
+                            </Border>
+
+                            <Border Margin="10, 5, 0, 5">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding DeleteSpokeCommand}" CommandParameter=""/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Border.Style>
+                                    <Style>
+                                        <Setter Property="Border.Background" Value="Transparent"/>
+                                        <Setter Property="UIElement.Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <!--<DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.SpokeScreen}">
+                        <Setter Property="Border.Visibility" Value="Visible"></Setter>
+                    </DataTrigger>-->
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.SpokeScreen}" />
+                                                    <Condition Binding="{Binding SpokeEditMode}" Value="1" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="UIElement.Visibility" Value="Visible" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/recycle_bin.png" Cursor="Hand" Stretch="UniformToFill"/>
+                            </Border>
+
+                        </StackPanel>
+                    </WrapPanel>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                            <Image Margin="10, 5,0, 10" Visibility="Visible" Source="/Resources/Icons/wheel_2.png" Cursor="Hand" Stretch="UniformToFill">
+                                <Image.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RoueAV}" Value="0">
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RoueAV}" Value="1">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/wheel_1.png"></Setter>
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RoueAV}" Value="2">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/wheel_2.png"></Setter>
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RoueAV}" Value="3">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/wheel_3.png"></Setter>
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RoueAV}" Value="4">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/wheel_4.png"></Setter>
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding ChangeRoueCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Image>
+
+
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Bold" Foreground="White" Content="{Binding FicheRoueName}"/>
+                        </StackPanel>
+                    </WrapPanel>
+
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <!--Affichage de l'opérateur-->
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Ariel" FontWeight="Normal" Foreground="White" Content="{Binding UserName}" />
+
+                            <Image Margin="10, 5, 0, 10" Cursor="Hand" Stretch="UniformToFill">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding SwitchScreenCommand}" CommandParameter="{x:Static models:EScreen.LoginScreen}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                                <Image.Style>
+                                    <Style>
+                                        <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                        <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user_group.png"></Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.MireScreen}">
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="1">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user01.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="2">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user02.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="3">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user03.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="4">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user04.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="5">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user05.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="6">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user06.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="7">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user07.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="8">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user08.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="9">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user09.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="10">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user10.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="11">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user11.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="12">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user12.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="13">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user13.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="14">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user14.png"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ActiveUserID}" Value="15">
+                                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/user15.png"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+
+
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/tools.png" Margin="10, 5, 0, 5" Cursor="Hand">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding SwitchScreenCommand}" CommandParameter="{x:Static models:EScreen.SettingsScreen}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Image.Style>
+                                    <Style>
+                                        <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.MireScreen}">
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/help_blue.png" Margin="10, 5, 0, 5" Visibility="Visible" Cursor="Hand">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding HelpCommand}" CommandParameter=""/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Image.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.LoginScreen}">
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.SettingsScreen}">
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.DirectoryScreen}">
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <Image Source="pack://siteoforigin:,,,/Resources/Icons/power_blue.png" Margin="10, 5, 0, 5" Cursor="Hand" Stretch="UniformToFill">
+
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding PrintScreenShutPopUpCommand}" CommandParameter=""/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Image.Style>
+                                    <Style>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentScreen}" Value="{x:Static models:EScreen.LoginScreen}">
+                                                <Setter Property="Image.Visibility" Value="Visible"></Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </StackPanel>
+                    </WrapPanel>
+                    <!--  <Label x:Name="label" Content="{Binding UserName}" HorizontalAlignment="Center" Margin="1119,0,396,17" VerticalAlignment="Bottom"/>-->
+                    <!-- <Label x:Name="label" Content="{Binding UserName}" HorizontalAlignment="Left" Margin="1458,40,0,0" VerticalAlignment="Top"/>-->
+
+                </Grid>
+            </Grid>
+
+        </Border>
+
+        <ContentControl Grid.Row="0" VerticalAlignment="Stretch" Content="{Binding CurrentRegion}">
+            <ContentControl.Resources>
+
+                <DataTemplate DataType="{x:Type viewModels:MireViewModel}">
+                    <views:MireView DataContext="{Binding ''}"/>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type viewModels:LoginViewModel}">
+                    <views:LoginView DataContext="{Binding ''}"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:UserSettingsViewModel}">
+                    <views:UserSettingsView DataContext="{Binding ''}"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:DirectoryViewModel}">
+                    <views:DirectoryView DataContext="{Binding ''}"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModels:SpokeViewModel}">
+                    <views:SpokeView DataContext="{Binding ''}"/>
+                </DataTemplate>
+                <!--TODO Suivre le model de MireViewModel, pour chaque nouvel écran : ajouter ici un nouveau DataTemplate dont le type est le ViewModel de l'écran-->
+
+            </ContentControl.Resources>
+        </ContentControl>
+
+
+
+
+        <!--TODO supprimer le textblock, textbox et button relatifs à l'interval quand les tests seront finis-->
+        <!--<TextBlock Grid.Row="1" Text="Interval" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,134,45"></TextBlock>
+<TextBox Grid.Row="1" Text="{Binding Interval, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="24" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,105,16">
+<TextBox.InputBindings>
+    <KeyBinding Key="Enter" Command="{Binding IntervalChangedCommand}"/>
+</TextBox.InputBindings>
+</TextBox>
+<Button Grid.Row="1" Content="Changer interval" Width="90" Height="30" Command="{Binding IntervalChangedCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,10,10"></Button>-->
+
+    </Grid>
+
+
+</Window>
+   

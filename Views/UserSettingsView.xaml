@@ -1,0 +1,628 @@
+﻿<UserControl x:Class="MireWpf.Views.UserSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:p="clr-namespace:MireWpf.Properties"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:MireWpf.ViewModels"
+             xmlns:converter="clr-namespace:MireWpf.Models"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" x:Name="UserSettingsControl"
+             d:DesignHeight="850" d:DesignWidth="1600" Background="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}"
+             d:DataContext="{d:DesignInstance viewModels:UserSettingsViewModel}">
+    <UserControl.Resources>
+        <converter:AppSettingsMultiParameterConverter x:Key="AppSettingsConverter" />
+        <converter:AppSettingsIntMultiParameterConverter x:Key="AppSettingsIntConverter" />
+        <Style TargetType="{x:Type CheckBox}" x:Key="myCheckboxStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="checkboxImage" Source="pack://siteoforigin:,,,/Resources/Icons/checkbox_normal.png" Width="20" Margin="0, 0, 20, 0"/>
+                            <ContentPresenter/>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="checkboxImage" Property="Source" Value="pack://siteoforigin:,,,/Resources/Icons/checkbox_checked.png"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type RadioButton}" x:Key="myRadioStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Background="Transparent" Cursor="Hand">
+                            <BulletDecorator.Bullet>
+                                <Grid Height="20" Width="20">
+                                    <Border Name="RadioOuter" Background="Transparent" BorderBrush="#42c0fb" BorderThickness="2" CornerRadius="24" />
+                                    <Border CornerRadius="20" Margin="8" Name="RadioMark" Background="#42c0fb" Visibility="Hidden" />
+                                </Grid>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter Margin="20, 0, 0, 0" />
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="RadioMark" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Width="{Binding ActualWidth, ElementName=UserSettingsControl}" Height="{Binding ActualHeight, ElementName=UserSettingsControl}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Viewbox Stretch="Uniform" Grid.Column="0">
+
+            <StackPanel Grid.Column="0" Margin="10">
+                <Border BorderBrush="#41719c" BorderThickness="1" CornerRadius="10">
+                    <Grid>
+                        <Border Name="mask01" Background="White" CornerRadius="9"/>
+                        <Grid Background="#5b9bd5">
+                            <Grid.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=mask01}"/>
+                            </Grid.OpacityMask>
+
+                            <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Normal" Foreground="White" Content="{x:Static p:Resources.USGTitle}"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+
+
+                <Border BorderBrush="Navy" BorderThickness="2" CornerRadius="20" Margin="0, 10, 0, 0" Height="750" Width="350">
+                <StackPanel Margin="20, 10, 0, 0">
+                    <Label FontSize="36" FontWeight="Bold" Content="{x:Static p:Resources.USGLabel1}" />
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 10" IsChecked="{Binding AutoZoom}" Content="{x:Static p:Resources.USD1}"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 10" IsChecked="{Binding FullFit}" Content="{x:Static p:Resources.USD2}"/>
+
+                    <Label FontSize="36" FontWeight="Bold" Margin="0, 110, 0, 0" Content="{x:Static p:Resources.USGLabel2}" />
+                    <RadioButton FontSize="32" Style="{StaticResource myRadioStyle}" IsChecked="{Binding ChartTypeBlock}" Margin="0, 0, 0, 5" GroupName="Chart" Content="{x:Static p:Resources.USD3B}"/>
+                    <RadioButton FontSize="32" Style="{StaticResource myRadioStyle}" IsChecked="{Binding ChartTypeXY}" Margin="0, 0, 0, 5" GroupName="Chart" Content="{x:Static p:Resources.USD3XY}"/>
+                    <RadioButton FontSize="32" Style="{StaticResource myRadioStyle}" IsChecked="{Binding ChartTypeRadar}" Margin="0, 0, 0, 5" GroupName="Chart" Content="{x:Static p:Resources.USD3R}" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 5">
+                        <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" IsChecked="{Binding ShowVoile}" Name="chkShowVoile" Tag="SettingsShowVoile">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding ModifyAppSettingsCommand}">
+                                        <i:InvokeCommandAction.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource AppSettingsConverter}">
+                                                <Binding ElementName="chkShowVoile" Path="Tag"/>
+                                                <Binding ElementName="chkShowVoile" Path="IsChecked"/>
+
+                                                <!-- Ajouter toutes les commandes ici lorsqu'on check cette case. -->
+                                                <Binding ElementName="chkShowSaut" Path="Tag"/>
+                                                <Binding ElementName="chkShowSaut" Path="IsChecked"/>
+                                            </MultiBinding>
+
+                                        </i:InvokeCommandAction.CommandParameter>
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                        <Image Grid.Row="0" Grid.Column="0" Source="../Resources/Images/Liste_voile_dep.png" Height="50" />
+                        <!--<Image Grid.Row="0" Grid.Column="0" Source="pack://siteoforigin:,,,/Resources/Icons/voile.png" Height="48"/>
+                        <Image Grid.Row="0" Grid.Column="0" Source="pack://siteoforigin:,,,/Resources/Icons/saut.png" Height="48"></Image>
+                        <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="2" Height="46" >
+                        <Image Grid.Row="0" Grid.Column="0" Source="../Resources/Images/Hub.png" Height="38"  />
+                        </Border>
+                        <Image Grid.Row="0" Grid.Column="0" Source="../Resources/Images/deportroue.JPG" Height="50"  /> -->
+                    </StackPanel>
+                    <!-- <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 5">
+                        <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" IsChecked="{Binding ShowSaut}" Name="chkShowSaut" Tag="SettingsShowSaut">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding ModifyAppSettingsCommand}">
+                                        <i:InvokeCommandAction.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource AppSettingsConverter}">
+                                                <Binding ElementName="chkShowSaut" Path="Tag"/>
+                                                <Binding ElementName="chkShowSaut" Path="IsChecked"/>
+                                            </MultiBinding>
+                                        </i:InvokeCommandAction.CommandParameter>
+                                    </i:InvokeCommandAction>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                        
+                    </StackPanel> -->
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding ShowMinMax}" Name="chkShowMinMax" Tag="SettingsShowMinMax" Content="{x:Static p:Resources.USD6}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding ModifyAppSettingsCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource AppSettingsConverter}">
+                                            <Binding ElementName="chkShowMinMax" Path="Tag"/>
+                                            <Binding ElementName="chkShowMinMax" Path="IsChecked"/>
+                                        </MultiBinding>
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 15" IsChecked="{Binding ShowPosition}" Content="{x:Static p:Resources.USD7}" x:Name="chkShowPosition" Tag="SettingsShowPosition">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding ModifyAppSettingsCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource AppSettingsConverter}">
+                                            <Binding ElementName="chkShowPosition" Path="Tag"/>
+                                            <Binding ElementName="chkShowPosition" Path="IsChecked"/>
+                                        </MultiBinding>
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        </Viewbox>
+        <Viewbox Stretch="Uniform" Grid.Column="1">
+            <StackPanel Grid.Column="1" Margin="10">
+            <Border BorderBrush="#41719c" BorderThickness="1" CornerRadius="10">
+                <Grid>
+                    <Border Name="mask02" Background="White" CornerRadius="9"/>
+                    <Grid Background="#5b9bd5">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=mask02}"/>
+                        </Grid.OpacityMask>
+
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Normal" Foreground="White" Content="{x:Static p:Resources.USDTitle}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Navy" BorderThickness="2" CornerRadius="20" Margin="0, 10, 0, 0" Height="750">
+                <StackPanel Margin="20, 10, 0, 0" Width="360">
+                    <Label FontSize="36" FontWeight="Bold" Margin="0, 0, 0, 0" Content="{x:Static p:Resources.USDLabel1}" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="75"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="70"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Source="pack://siteoforigin:,,,/Resources/Icons/measure.png"></Image>
+                        <RadioButton Grid.Row="0" Grid.Column="1" FontSize="32" Style="{StaticResource myRadioStyle}" Margin="5" GroupName="units1" IsChecked="{Binding UnitLength_0}" Content="{x:Static p:Resources.MesFr}"/>
+                        <RadioButton Grid.Row="0" Grid.Column="2" FontSize="32" Style="{StaticResource myRadioStyle}" Margin="5" GroupName="units1" IsChecked="{Binding UnitLength_1}" Content="{x:Static p:Resources.MesUk}"/>
+
+                        <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Source="pack://siteoforigin:,,,/Resources/Icons/weight.png"></Image>
+                        <RadioButton Grid.Row="1" Grid.Column="1" FontSize="32" Style="{StaticResource myRadioStyle}" Margin="5,17,5,0" GroupName="units2" VerticalAlignment="Top" IsChecked="{Binding UnitWeight_0}" Content="{x:Static p:Resources.PoidsFr}"/>
+                        <RadioButton Grid.Row="1" Grid.Column="2" FontSize="32" Style="{StaticResource myRadioStyle}" Margin="5" GroupName="units2" VerticalAlignment="Bottom" IsChecked="{Binding UnitWeight_1}" Content="{x:Static p:Resources.PoidsUk}"/>
+                        <RadioButton Grid.Row="2" Grid.Column="1" FontSize="32" Style="{StaticResource myRadioStyle}" Margin="5" GroupName="units2" IsChecked="{Binding UnitWeight_2}" Content="{x:Static p:Resources.MesFr}"/>
+                        <RadioButton Grid.Row="2" Grid.Column="2" FontSize="32" Style="{StaticResource myRadioStyle}" Margin="5" GroupName="units2" IsChecked="{Binding UnitWeight_3}" Content="{x:Static p:Resources.ForceUk}"/>
+                    </Grid>
+
+                    <!--<    <Label FontSize="36" FontWeight="Bold" Margin="0, 0, 0, 5">Real Time</Label>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 10" IsChecked="{Binding RealtimeTension}">Tension</CheckBox>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 10" IsChecked="{Binding RealtimeTime}" Content="Time"/>
+
+                    <Label FontSize="36" FontWeight="Bold" Margin="0, 0, 0, 5">Tension Array</Label>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 00, 0, 5" IsChecked="{Binding TensionData}">Data</CheckBox>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding TensionLeftRight}">Left / Right</CheckBox>
+                    -->
+                    <Label FontSize="36" FontWeight="Bold" Margin="0, 0, 0, 0" Content="{x:Static p:Resources.USDLabel4}" />
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding IdentityManual}" Content="{x:Static p:Resources.USPr8}"/>
+                    <Border Margin="0, 10, 0, 10">
+                        <StackPanel x:Name="Labels" Margin="0,0,0,0" x:FieldModifier="public">
+
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <CheckBox Style="{StaticResource myCheckboxStyle}" IsChecked="{Binding CheckBoxParam1}"/>
+                                <TextBox Name ="label1" Text="{Binding Label1}" FontSize="30" Width="280" TextChanged="label1_TextChanged"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <CheckBox Style="{StaticResource myCheckboxStyle}" IsChecked="{Binding CheckBoxParam2}"/>
+                                <TextBox Name ="label2" Text="{Binding Label2}" FontSize="30" Width="280"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <CheckBox Style="{StaticResource myCheckboxStyle}" IsChecked="{Binding CheckBoxParam3}"/>
+                                <TextBox Name ="label3" Text="{Binding Label3}" FontSize="30" Width="280"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <CheckBox Style="{StaticResource myCheckboxStyle}" IsChecked="{Binding CheckBoxParam4}"/>
+                                <TextBox Name ="label4" Text="{Binding Label4}" FontSize="30" Width="280"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
+                                <CheckBox Style="{StaticResource myCheckboxStyle}" IsChecked="{Binding CheckBoxParam5}"/>
+                                <TextBox Name ="label5" Text="{Binding Label5}" FontSize="30" Width="280"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Button HorizontalAlignment="Stretch" Height="40" Content="Enter" FontSize="25" Background="Violet" Click="Button_Click" Margin="10,0,30,0"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+            </Viewbox>
+
+            <Viewbox Stretch="Uniform" Grid.Column="2">
+
+                <StackPanel Grid.Column="2" Margin="10">
+            <Border BorderBrush="#41719c" BorderThickness="1" CornerRadius="10">
+                <Grid>
+                    <Border Name="mask03" Background="White" CornerRadius="9"/>
+
+                    <Grid Background="#5b9bd5">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=mask03}"/>
+                        </Grid.OpacityMask>
+
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Normal" Foreground="White" Content="Computation"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Navy" BorderThickness="2" CornerRadius="20" Height="300" Margin="0, 10, 0, 20" >
+                <StackPanel Margin="20, 10, 0, 0">
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 20, 0, 5" IsChecked="{Binding CalculOffset}" Content="{x:Static p:Resources.USC1}"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 5, 0, 5" IsChecked="{Binding JointureInvisible}" Visibility="Collapsed" Content="{x:Static p:Resources.USC2}"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 5, 0, 5" IsChecked="{Binding AutoRefresh}"  Content="{x:Static p:Resources.USC4}"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 5, 0, 15" IsChecked="{Binding ErrasseScratchs}" Content="{x:Static p:Resources.USC3}"/>
+
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="#41719c" BorderThickness="1" CornerRadius="10">
+                <Grid>
+                    <Border Name="mask05" Background="White" CornerRadius="9"/>
+
+                    <Grid Background="#5b9bd5">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=mask05}"/>
+                        </Grid.OpacityMask>
+
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Normal" Foreground="White" Content="{x:Static p:Resources.USPTitle}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Navy" BorderThickness="2" CornerRadius="20" Margin="0, 10, 0, 20"  Height="346">
+                <StackPanel Margin="20,10,0,8">
+                    <StackPanel Orientation="Horizontal" Margin="0, 20, 0, 5">
+                        <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" IsChecked="{Binding Teacher}" Content="{x:Static p:Resources.USP1}"/>
+                        <Image Source="pack://siteoforigin:,,,/Resources/Icons/leftNut_1.jpg" Height="48" Margin="50, 0, 0, 0"></Image>
+                        <Image Source="pack://siteoforigin:,,,/Resources/Icons/rightNut_2.jpg" Height="48" Margin="5, 0, 0, 0"></Image>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 5">
+                        <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" IsChecked="{Binding Celebrate}" Content="{x:Static p:Resources.USP2}" Checked="CheckBox_Checked_1"/>
+                        <Image Source="pack://siteoforigin:,,,/Resources/Icons/star_full.png" Height="48" Margin="5, 0, 0, 0"></Image>
+                        <Image Source="pack://siteoforigin:,,,/Resources/Icons/star_full.png" Height="48"></Image>
+                        <Image Source="pack://siteoforigin:,,,/Resources/Icons/star_full.png" Height="48"></Image>
+                    </StackPanel>
+                    <Label FontSize="36" FontWeight="Bold" Margin="0, 10, 0, 5" Content="{x:Static p:Resources.USPLabel1}" />
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding DataPerParts}" Content="{x:Static p:Resources.USP3}"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 15" IsChecked="{Binding DataPerUser}" Content="{x:Static p:Resources.USP4}"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+</Viewbox>
+        <Viewbox Stretch="Uniform" Grid.Column="3">
+            <StackPanel Grid.Column="3" Margin="10">
+            <Border BorderBrush="#41719c" BorderThickness="1" CornerRadius="10">
+
+                <Grid>
+                    <Border Name="mask04" Background="White" CornerRadius="9"/>
+
+                    <Grid Background="#5b9bd5">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=mask04}"/>
+                        </Grid.OpacityMask>
+
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Normal" Foreground="White" Content="{x:Static p:Resources.USPrTitle}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Navy" BorderThickness="2" CornerRadius="20" Margin="0, 10, 0, 20" Height="281">
+                <StackPanel Margin="10, 10, 0, 0">
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 5, 0, 5" IsChecked="{Binding AutoPrint}" Content="{x:Static p:Resources.USPr1}"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding Barcode}" Content="{x:Static p:Resources.USPr2}" Visibility="Collapsed"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding Name}" Content="{x:Static p:Resources.USPr3}" Visibility="Collapsed"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding Date}" Content="{x:Static p:Resources.USPr4}" Visibility="Collapsed"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding FinalValue}" Content="{x:Static p:Resources.USPr5}" Visibility="Collapsed"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding TorqueMini}" Content="{x:Static p:Resources.USPr6}" Visibility="Collapsed"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding TorqueMaxi}" Content="{x:Static p:Resources.USPr7}" Visibility="Collapsed"/>
+                    <CheckBox FontSize="32" Style="{StaticResource myCheckboxStyle}" Margin="0, 0, 0, 5" IsChecked="{Binding ZD420}" Content="ZD420"/>
+                    <ComboBox Name="cbChoixMasque" FontSize="32" Margin="0, 0, 5, 5" SelectionChanged="cbChoixMasque_SelectionChanged"/>
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="#41719c" BorderThickness="1" CornerRadius="10">
+                <Grid>
+                    <Border Name="mask07" Background="White" CornerRadius="9"/>
+
+                    <Grid Background="#5b9bd5" >
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=mask07}"/>
+                        </Grid.OpacityMask>
+
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Normal" Foreground="White" Content="Tensiometre"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Navy" BorderThickness="2" CornerRadius="20" Margin="0, 10, 0, 20" Height="130">
+                <StackPanel Margin="10, 10, 0, 0">
+                    <RadioButton FontSize="28" Style="{StaticResource myRadioStyle}" Margin="0, 5, 0, 5" GroupName="tensiometre" IsChecked="{Binding Mitutoyo}" Content="Mitutoyo (RS232)"/>
+                    <RadioButton FontSize="28" Style="{StaticResource myRadioStyle}" Margin="0, 5, 0, 5" GroupName="tensiometre" IsChecked="{Binding Mahr}" Content="Mahr (All)"/>
+                </StackPanel>
+            </Border>
+
+            <Border BorderBrush="#41719c" BorderThickness="1" CornerRadius="10">
+                <Grid>
+                    <Border Name="mask06" Background="White" CornerRadius="9"/>
+
+                    <Grid Background="#5b9bd5">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=mask06}"/>
+                        </Grid.OpacityMask>
+
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Normal" Foreground="White" Content="{x:Static p:Resources.USMTitle}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border BorderBrush="Navy" BorderThickness="2" CornerRadius="20" Margin="0, 10, 0, 20" Height="100">
+                <Grid Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding Manual1Command}" CommandParameter=""/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image.Style>
+                            <Style>
+                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/hub_unlock.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Manual1}" Value="1">
+                                        <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/hub_lock.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+
+                    <Image Grid.Column="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding Manual2Command}" CommandParameter=""/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image.Style>
+                            <Style>
+                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/voile.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Manual2}" Value="1">
+                                        <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/voile_disabled.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+
+                    <Image Grid.Column="2">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding Manual3Command}" CommandParameter=""/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image.Style>
+                            <Style>
+                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/saut.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Manual3}" Value="1">
+                                        <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/saut_disabled.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+
+                    <Image Grid.Column="3">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding Manual4Command}" CommandParameter=""/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Image.Style>
+                            <Style>
+                                <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/stabilization_center.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Manual4}" Value="1">
+                                        <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/stabilization_left.png"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Manual4}" Value="2">
+                                        <Setter Property="Image.Source" Value="pack://siteoforigin:,,,/Resources/Icons/stabilization_right.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </Grid>
+            </Border>
+        </StackPanel>
+</Viewbox>
+        <!--Show Params pop up-->
+        <!--<Grid Grid.Column="0" Grid.ColumnSpan="4" Background="#88000000" Margin="00">
+
+            <Grid.Style>
+                <Style>
+                    <Setter Property="Label.Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowParamsPopUp}" Value="true">
+                            <Setter Property="Grid.Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <Grid Name="ParamPopUp" Background="Transparent" Width="1250" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Name="BorderShut3">
+                    <Grid>
+                        <Border Name="maskParams" Background="White" CornerRadius="10"/>
+
+                        <Grid Background="#5b9bd5" Margin="0,0,-0,0">
+                            <Grid.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=maskParams}"/>
+                            </Grid.OpacityMask>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="55" FontFamily="Ariel" FontWeight="600" Foreground="White" Content="{x:Static p:Resources.PopUpTitleParams}"/>
+                            </StackPanel>
+                        </Grid>
+
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Margin="0,5,0,0">
+                    <Grid>
+                        <Border Name="maskParams2" Background="White" CornerRadius="10"/>
+
+                        <Grid Background="White" Margin="0,0,-0,0">
+                            <Grid.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=maskParams2}"/>
+                            </Grid.OpacityMask>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="150"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Name="Params" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/ok.png" Margin="10,50,0,5" MouseLeftButtonDown="Image_MouseLeftButtonDown">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                                            <i:InvokeCommandAction Command="{Binding ParamsPopUpOkCommand}" CommandParameter=""/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Image>
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/cancel.png" Margin="10,50,10,5">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                                            <i:InvokeCommandAction Command="{Binding ParamsPopUpCancelCommand}" CommandParameter=""/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Image>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                </Border>
+
+
+
+            </Grid>
+
+        </Grid>-->
+
+        <!--Show shut pop up-->
+        <Grid Grid.Column="0" Grid.ColumnSpan="4" Background="#88000000" Margin="00">
+
+            <Grid.Style>
+                <Style>
+                    <Setter Property="Label.Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowShutPopUp}" Value="true">
+                            <Setter Property="Grid.Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <Grid Background="Transparent" Width="1000" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Name="BorderShut2">
+                    <Grid>
+                        <Border Name="maskShut" Background="White" CornerRadius="10"/>
+
+                        <Grid Background="#5b9bd5" Margin="0,0,-0,0">
+                            <Grid.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=maskShut}"/>
+                            </Grid.OpacityMask>
+
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" FontFamily="Ariel" FontWeight="Normal" Foreground="White" Content="{x:Static p:Resources.PopUpTitleShut}"/>
+                            </StackPanel>
+                        </Grid>
+
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" BorderBrush="#41719c" BorderThickness="1" CornerRadius="10" Margin="0,5,0,0">
+                    <Grid>
+                        <Border Name="maskShut2" Background="White" CornerRadius="10"/>
+
+                        <Grid Background="White" Margin="0,0,-0,0">
+                            <Grid.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=maskShut2}"/>
+                            </Grid.OpacityMask>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label FontSize="48" FontFamily="Ariel" FontWeight="Normal" Content="{x:Static p:Resources.PopUpTxtShut}" HorizontalAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/ok.png" Margin="10,5,0,5">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                                            <i:InvokeCommandAction Command="{Binding ShutPopUpOkCommand}" CommandParameter=""/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Image>
+                                <Image Source="pack://siteoforigin:,,,/Resources/Icons/cancel.png" Margin="10,5">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                                            <i:InvokeCommandAction Command="{Binding ShutPopUpCancelCommand}" CommandParameter=""/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Image>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                </Border>
+
+
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>
