@@ -708,5 +708,10 @@ namespace MireWpf.ViewModels
         {
             Debug.WriteLine("testing");
         }
+
+        private void testing1()
+        {
+            Debug.WriteLine("testing");
+        }
     }
 }
